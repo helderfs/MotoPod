@@ -1,0 +1,412 @@
+<script language="javascript" src="./script/x_mascara.js"></script>
+<script language="javascript">
+	function Comprando(){
+		document.formFastCad.fasthdEND_CEP.value 		= document.getElementById('iframeCEPFastCad').contentWindow.document.getElementById('fastEND_CEP').value;
+		document.formFastCad.fasthdEND_NOME.value 		= document.getElementById('iframeCEPFastCad').contentWindow.document.getElementById('fastEND_NOME').value;
+		document.formFastCad.fasthdEND_NUMERO.value 	= document.getElementById('iframeCEPFastCad').contentWindow.document.getElementById('fastEND_NUMERO').value;
+		document.formFastCad.fasthdEND_COMPL_OBS.value 	= document.getElementById('iframeCEPFastCad').contentWindow.document.getElementById('fastEND_COMPL_OBS').value;
+		document.formFastCad.fasthdEND_BAIRRO.value 	= document.getElementById('iframeCEPFastCad').contentWindow.document.getElementById('fastEND_BAIRRO').value;
+		document.formFastCad.fasthdEND_CIDADE.value 	= document.getElementById('iframeCEPFastCad').contentWindow.document.getElementById('fastEND_CIDADE').value;
+		document.formFastCad.fasthdEND_ESTADO.value 	= document.getElementById('iframeCEPFastCad').contentWindow.document.getElementById('fastEND_ESTADO').value;
+		
+		window.parent.document.formFastCad.submit();
+	}
+	
+	function ControlCPFCNPJ(mostraCPF){
+		if (mostraCPF == 'S'){
+			document.getElementById('blockCPF1').style.display='block';
+			document.getElementById('blockCPF2').style.display='block';
+			document.getElementById('blockCNPJ1').style.display='none';
+			document.getElementById('blockCNPJ2').style.display='none';
+		}else{
+			document.getElementById('blockCPF1').style.display='none';
+			document.getElementById('blockCPF2').style.display='none';
+			document.getElementById('blockCNPJ1').style.display='block';
+			document.getElementById('blockCNPJ2').style.display='block';
+		}
+	}
+	
+</script>
+<?php
+
+$c_erros 			= "";
+$erro_nome  		= "";
+$erro_cpf   		= "";
+$erro_cnpj  		= "";
+$erro_fone1_1 		= "";
+$erro_fone1_2 		= "";
+$erro_fone_res_1 	= "";
+$erro_fone_res_2 	= "";
+$erro_email 		= "";
+
+// Pessoa
+$fastPES_TIPO			= "";
+$fastPES_NOME			= "";
+$fastPES_CPF			= "";
+$fastPES_CNPJ			= "";
+$fastPES_CPFCNPJ 		= "";
+$fastPES_CNPJ_NOME_FANT = "";
+$fastPES_RG 			= "";
+$fastPES_NOME 			= "";
+$fastPES_DT_CAD  		= date("d-m-Y"); //date("Y-m-d H:i:s");
+$fastPES_RAZAO_SOC 		= "";
+$fastPES_CNPJ_NOME_FANT = "";
+$fastPES_INSC_MUNICIP 	= "";
+$fastPES_CNPJ_ISENTO 	= "";
+$fastUSR_EMAIL 			= "";
+
+// Endereco
+$fastEND_CODIGO 	= 0;
+$fastEND_PAIS   	= 'Brasil';
+$fastEND_CEP 		= "";
+$fastEND_NOME 		= "";
+$fastEND_NUMERO 	= "";
+$fastEND_COMPL_OBS 	= "";
+$fastEND_BAIRRO 	= "";
+$fastEND_CIDADE 	= "";
+$fastEND_ESTADO 	= "";
+
+// Contato
+$fastCTT_FONE_RES_1		= "";
+$fastCTT_FONE_RES_2		= "";
+$fastCTT_FONE_RES_RAM	= "";
+$fastCTT_FONE1_1		= "";
+$fastCTT_FONE1_2		= "";
+
+if (isset($_SESSION['fastPES_TIPO'])) 			$fastPES_TIPO			= $_SESSION['fastPES_TIPO'];
+if (isset($_SESSION['fastPES_NOME'])) 			$fastPES_NOME			= $_SESSION['fastPES_NOME'];
+if (isset($_SESSION['fastPES_CPF'])) 			$fastPES_CPF			= $_SESSION['fastPES_CPF'];
+if (isset($_SESSION['fastPES_CNPJ'])) 			$fastPES_CNPJ			= $_SESSION['fastPES_CNPJ'];
+if (isset($_SESSION['fastCTT_FONE_RES_1'])) 	$fastCTT_FONE_RES_1		= $_SESSION['fastCTT_FONE_RES_1'];
+if (isset($_SESSION['fastCTT_FONE_RES_2'])) 	$fastCTT_FONE_RES_2		= $_SESSION['fastCTT_FONE_RES_2'];
+if (isset($_SESSION['fastCTT_FONE_RES_RAM']))	$fastCTT_FONE_RES_RAM	= $_SESSION['fastCTT_FONE_RES_RAM'];
+if (isset($_SESSION['fastCTT_FONE1_1'])) 		$fastCTT_FONE1_1		= $_SESSION['fastCTT_FONE1_1'];
+if (isset($_SESSION['fastCTT_FONE1_2'])) 		$fastCTT_FONE1_2		= $_SESSION['fastCTT_FONE1_2'];
+if (isset($_SESSION['fastUSR_EMAIL'])) 			$fastUSR_EMAIL 			= $_SESSION['fastUSR_EMAIL'];
+
+if (isset($_SESSION['fastEND_CEP'])) 			$fastEND_CEP 			= $_SESSION['fastEND_CEP'];
+if (isset($_SESSION['fastEND_NOME'])) 			$fastEND_NOME 			= $_SESSION['fastEND_NOME'];
+if (isset($_SESSION['fastEND_NUMERO'])) 		$fastEND_NUMERO 		= $_SESSION['fastEND_NUMERO'];
+if (isset($_SESSION['fastEND_COMPL_OBS'])) 		$fastEND_COMPL_OBS		= $_SESSION['fastEND_COMPL_OBS'];
+if (isset($_SESSION['fastEND_BAIRRO'])) 		$fastEND_BAIRRO 		= $_SESSION['fastEND_BAIRRO'];
+if (isset($_SESSION['fastEND_CIDADE'])) 		$fastEND_CIDADE 		= $_SESSION['fastEND_CIDADE'];
+if (isset($_SESSION['fastEND_ESTADO'])) 		$fastEND_ESTADO 		= $_SESSION['fastEND_ESTADO'];
+
+if ($_SESSION['ultPagVisit'] == "IniciaCadFast"){
+
+	if ($fastPES_NOME == ""){
+		$c_erros = $c_erros . ",Nome não informado";
+		$erro_nome  = ".";
+	}
+	if ($fastPES_TIPO == "F"){
+		if ($fastPES_CPF == ""){
+			$erro_cpf   = ".";
+			$c_erros = $c_erros . ",CPF não informado";
+		}
+	}
+	if ($fastPES_TIPO == "J"){
+		if ($fastPES_CNPJ == ""){
+			$erro_cnpj  = ".";
+			$c_erros = $c_erros . ",CNPJ não informado";
+		}
+	}
+	
+	// Valida CPF/CNPJ
+	if ($fastPES_TIPO == "J"){
+		$aux = CalculaCNPJ($fastPES_CNPJ);
+		if ($aux != ""){
+			$erro_cnpj = ".";
+			$c_erros = $c_erros . $aux;
+		}
+	}else{
+		$aux = CalculaCPF($fastPES_CPF);
+		if ($aux != ""){
+			$erro_cpf = ".";
+			$c_erros = $c_erros . $aux;
+		}
+	}
+	
+	if ($fastUSR_EMAIL == ""){
+		$erro_email = ".";
+		$c_erros = $c_erros . ",E-mail não informado";
+	}
+	
+	// ######################################################################## CONTATO
+	/* kkk
+	if (isset($_POST['fastCTT_FONE_RES_1']))   $fastCTT_FONE_RES_1 = $_POST['fastCTT_FONE_RES_1'];
+	if (isset($_POST['fastCTT_FONE_RES_2']))   $fastCTT_FONE_RES_2 = $_POST['fastCTT_FONE_RES_2'];
+	if (isset($_POST['fastCTT_FONE_RES_RAM'])) $fastCTT_FONE_RES_RAM = $_POST['fastCTT_FONE_RES_RAM'];
+	*/
+	if ($fastCTT_FONE_RES_1 == ""){
+		$erro_fone_res_1 = ".";
+		$c_erros = $c_erros . ",Código Telefone Principal não informado";
+	}
+	if ($fastCTT_FONE_RES_1 != "" && strlen($fastCTT_FONE_RES_1) < 2){
+		$erro_fone_res_1 = ".";
+		$c_erros = $c_erros . ",Código Telefone Principal incorreto.";
+	}
+	if ($fastCTT_FONE_RES_2 != "" && strlen($fastCTT_FONE_RES_2) < 8){
+		$c_erros = $c_erros . ",Telefone Principal incorreto.";
+		$erro_fone_res_2 = ".";
+	}
+	if ($fastCTT_FONE_RES_2 == ""){
+		$erro_fone_res_2 = ".";
+		$c_erros = $c_erros . ",Telefone Principal não informado";
+	}
+	/* kkk
+	if (isset($_POST['fastCTT_FONE1_1'])) $fastCTT_FONE1_1 = $_POST['fastCTT_FONE1_1'];
+	if (isset($_POST['fastCTT_FONE1_2'])) $fastCTT_FONE1_2 = $_POST['fastCTT_FONE1_2'];
+	*/
+	if ($fastCTT_FONE1_1 != "" && strlen($fastCTT_FONE1_1) < 2){
+		$erro_fone1_1 = ".";
+		$c_erros = $c_erros . ",Código Telefone Celular incorreto.";
+	}
+	if ($fastCTT_FONE1_2 != "" && strlen($fastCTT_FONE1_2) < 8){
+		$erro_fone1_2 = ".";
+		$c_erros = $c_erros . ",Telefone Celular incorreto.";
+	}
+	
+	// ######################################################################## ENDERECO
+	if ($fastEND_CEP == ""){
+		$erro_cep = ".";
+		$c_erros = $c_erros . ",CEP não informado";
+	}
+	if ($fastEND_NOME == ""){
+		$erro_endereco = ".";
+		$c_erros = $c_erros . ",Endereço não informado";
+	}
+	if ($fastEND_NUMERO == ""){
+		$erro_numero = ".";
+		$c_erros = $c_erros . ",Número Endereço não informado";
+	}
+	if ($fastEND_BAIRRO == ""){
+		$erro_bairro = ".";
+		$c_erros = $c_erros . ",Bairro não informado";
+	}
+	if ($fastEND_CIDADE == ""){
+		$erro_cidade = ".";
+		$c_erros = $c_erros . ",Cidade não informada";
+	}
+	if ($fastEND_ESTADO == ""){
+		$erro_uf = ".";
+		$c_erros = $c_erros . ",Estado não informado";
+	}
+	
+	/* ##################### INSERCAO ##################### */
+	if ($c_erros != ""){
+		echo msgErro($c_erros);
+	}else{
+		$fastUSR_SENHA = gerar_senha(8, false, true, true, false);
+		
+		if ($fastPES_TIPO == "F") $PES_CPFCNPJ = $fastPES_CPF;
+
+		if ($fastPES_TIPO == "J"){
+			$PES_CPFCNPJ = $fastPES_CNPJ;
+			$PES_CNPJ_NOME_FANT = $fastPES_NOME;
+		}
+
+		// ############# Cadastra PESSOA
+		cadPessoa(	soNumero($PES_CPFCNPJ),
+					$fastUSR_EMAIL,
+					$fastUSR_SENHA,
+					"S",				// USR_ATIVO
+					"",					// USR_SESSAO
+					"S",				// USR_RECEBE_EMAILS
+					$fastPES_TIPO,
+					$fastPES_NOME,
+					"",					// PES_SEXO
+					$fastPES_DT_CAD,
+					"",					// PES_DT_NASC
+					"",					// PES_STATUS
+					"",					// PES_RG
+					"",					// PES_OBS
+					$fastPES_RAZAO_SOC,
+					$fastPES_CNPJ_NOME_FANT,
+					"", 				// PES_INSC_MUNICIP
+					"",					// PES_INSC_ESTAD
+					$fastPES_CNPJ_ISENTO);
+		// kkk enviar senha para email do usuario
+					
+		cadPesEnd(	soNumero($PES_CPFCNPJ),
+					$fastUSR_EMAIL,
+					$fastEND_CODIGO,
+					$fastEND_NOME,
+					$fastEND_NUMERO,
+					"",	// END_COMPL
+					$fastEND_COMPL_OBS,
+					$fastEND_BAIRRO,
+					$fastEND_CIDADE,
+					$fastEND_ESTADO,
+					$fastEND_PAIS,
+					soNumero($fastEND_CEP), 
+					"S");
+						
+		cadPesCtt(	soNumero($PES_CPFCNPJ),
+					$fastCTT_FONE_RES_1.$fastCTT_FONE_RES_2,
+					$fastCTT_FONE_RES_RAM,
+					"",	// CTT_FONE_COM
+					"", // CTT_FONE_COM_RAM
+					$fastCTT_FONE1_1.$fastCTT_FONE1_2);
+
+		if (isset($_SESSION['fastPES_TIPO'])) 			$fastPES_TIPO			= $_SESSION['fastPES_TIPO'];
+		if (isset($_SESSION['fastPES_NOME'])) 			$fastPES_NOME			= $_SESSION['fastPES_NOME'];
+		if (isset($_SESSION['fastPES_CPF'])) 			$fastPES_CPF			= $_SESSION['fastPES_CPF'];
+		if (isset($_SESSION['fastPES_CNPJ'])) 			$fastPES_CNPJ			= $_SESSION['fastPES_CNPJ'];
+		if (isset($_SESSION['fastCTT_FONE_RES_1'])) 	$fastCTT_FONE_RES_1		= $_SESSION['fastCTT_FONE_RES_1'];
+		if (isset($_SESSION['fastCTT_FONE_RES_2'])) 	$fastCTT_FONE_RES_2		= $_SESSION['fastCTT_FONE_RES_2'];
+		if (isset($_SESSION['fastCTT_FONE_RES_RAM']))	$fastCTT_FONE_RES_RAM	= $_SESSION['fastCTT_FONE_RES_RAM'];
+		if (isset($_SESSION['fastCTT_FONE1_1'])) 		$fastCTT_FONE1_1		= $_SESSION['fastCTT_FONE1_1'];
+		if (isset($_SESSION['fastCTT_FONE1_2'])) 		$fastCTT_FONE1_2		= $_SESSION['fastCTT_FONE1_2'];
+		if (isset($_SESSION['fastUSR_EMAIL'])) 			$fastUSR_EMAIL 			= $_SESSION['fastUSR_EMAIL'];
+
+		if (isset($_SESSION['fastEND_CEP'])) 			$fastEND_CEP 			= $_SESSION['fastEND_CEP'];
+		if (isset($_SESSION['fastEND_NOME'])) 			$fastEND_NOME 			= $_SESSION['fastEND_NOME'];
+		if (isset($_SESSION['fastEND_NUMERO'])) 		$fastEND_NUMERO 		= $_SESSION['fastEND_NUMERO'];
+		if (isset($_SESSION['fastEND_COMPL_OBS'])) 		$fastEND_COMPL_OBS		= $_SESSION['fastEND_COMPL_OBS'];
+		if (isset($_SESSION['fastEND_BAIRRO'])) 		$fastEND_BAIRRO 		= $_SESSION['fastEND_BAIRRO'];
+		if (isset($_SESSION['fastEND_CIDADE'])) 		$fastEND_CIDADE 		= $_SESSION['fastEND_CIDADE'];
+		if (isset($_SESSION['fastEND_ESTADO'])) 		$fastEND_ESTADO 		= $_SESSION['fastEND_ESTADO'];
+		
+		// ################## ACESSO SESSAO USUARIO e PASSA PARA PAGINA
+		$_SESSION['action'] = "cad";
+		
+		if ($fastPES_TIPO == "J")
+			$_SESSION['ses_cpfcnpj'] = soNumero($fastPES_CNPJ);
+		else
+			$_SESSION['ses_cpfcnpj'] = soNumero($fastPES_CPF);
+
+		$_SESSION['sesEmailLog'] 	= $fastUSR_EMAIL;
+		$_SESSION['loginsenha'] = $fastUSR_SENHA;
+		$_SESSION['nome'] 		= $fastPES_NOME;
+
+		// #### ARMAZENA CPF / CNPJ NA SESSAO, caso exista pedido ####
+		CPFCNPJSessaoPedido($PES_CPFCNPJ, $ck_sessao);
+
+		?>
+		<script language="javascript" type="text/javascript">window.location="endereco";</script>
+		<?php
+	}
+}
+?>
+
+<input type="hidden" name="fasthdEND_CEP" 		value="">
+<input type="hidden" name="fasthdEND_NOME" 		value="">
+<input type="hidden" name="fasthdEND_NUMERO" 	value="">
+<input type="hidden" name="fasthdEND_COMPL_OBS" value="">
+<input type="hidden" name="fasthdEND_BAIRRO" 	value="">
+<input type="hidden" name="fasthdEND_CIDADE" 	value="">
+<input type="hidden" name="fasthdEND_ESTADO" 	value="">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="" style="margin-bottom:15px;" class="texto_campo">
+	<!-- COMPRA SEM LOGIN OU SENHA -->
+	<tr>
+		<td>
+			<table id="" width="100%" border="0" cellspacing="0" cellpadding="0" style="color:black;">
+				<tr>
+					<td colspan="3" bgcolor="#32CD32" height="30px" style="padding:10px 10px 10px 10px;"><label style="font-size:18px;"><strong>Compre sem precisar de login e senha</strong></label></td>
+				</tr>
+
+				<tr><td height="5px"></td></tr>
+
+				<tr>
+					<!-- ################# JA CADASTRADO ################# -->
+					<td width="48%" valign="top">
+						<table id="fast_buy" width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td colspan="2" bgcolor="#CBCBCB" height="30px" style="padding:10px 10px 10px 10px;"><label style="font-size:18px;"><strong>1 - Dados Pessoais</strong></label></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">
+									<input type="radio" name="fastPES_TIPO" value="F" onclick="ControlCPFCNPJ('S');" <?php if ($fastPES_TIPO != "J"){echo "checked";} ?>><b><label style="margin-right:5px; color:blue;">Pessoa Física&nbsp;&nbsp;&nbsp;</label></b>
+									<input type="radio" name="fastPES_TIPO" value="J" onclick="ControlCPFCNPJ();" <?php if ($fastPES_TIPO == "J"){echo "checked";} ?>><b><label style="margin-right:5px; color:blue;">Pessoa Jurídica</label></b>
+								</td>
+							</tr>
+							<tr>
+								<td height="30px"><div align="right"><b><label for="name" style="margin-right:5px;">Nome Completo</label></b></div></td>
+								<td align="left"><input type="text" class="<?php if($erro_nome != ""){echo "field_error";}else{echo "input";} ?>" maxlength="80" id="name" name="fastPES_NOME" style="width:300px;" value="<?php if($fastPES_NOME != ""){ echo $fastPES_NOME; } ?>"></td>
+							</tr>
+							<tr>
+								<td height="30px" width="35%" class="td_cad">
+									<div align="right"><b>
+										<div id="blockCPF1"><label for="name" style="margin-right:5px;">CPF</label></div>
+										<div id="blockCNPJ1"><label for="name" style="margin-right:5px;">CNPJ</label></div>
+									</b></div>
+								</td>
+								<td align="left">
+									<div id="blockCPF2">
+										<input type="text" class="<?php if($erro_cpf != "") echo "field_error"; else echo "input"; ?>" name="fastPES_CPF" value="<?php if($fastPES_CPF != ""){ echo $fastPES_CPF; } ?>" maxlength="14" style="width:142px;" onkeypress="return valCPF(event,this);return false;" onBlur="ValidarCPF(document.formFastCad.fastPES_CPF);">
+									</div>
+									
+									<div id="blockCNPJ2">
+									<input type="text" class="<?php if($erro_cnpj != "") echo "field_error"; else echo "input"; ?>" name="fastPES_CNPJ" value="<?php if($fastPES_CNPJ != ""){ echo $fastPES_CNPJ; } ?>" maxlength="18" style="width:142px;" onkeypress="return valCNPJ(event,this);return false;" onBlur="ValidarCNPJ(document.formFastCad.fastPES_CNPJ);">
+									</div>	   
+								</td>
+							</tr>
+							<tr>
+								<td><div align="right" id="fone01"><b><label style="margin-right:5px;">Telefone Principal</label></b></div></td>
+								<td align="left">
+<input type="text" style="WIDTH:30px;"  maxlength="2" id="fastCTT_FONE_RES_1" name="fastCTT_FONE_RES_1" value="<?php if($fastCTT_FONE_RES_1 != "") echo $fastCTT_FONE_RES_1; ?>" class="<?php if($erro_fone_res_1 != "") echo "field_error"; else echo "input"; ?>" onKeyPress="return(ConsisteNumerico('2',this,event))" onkeyup="if(this.value.length == 2) document.formFastCad.fastCTT_FONE_RES_2.focus()"> - 
+<input type="text" style="WIDTH:100px;" maxlength="9" id="fastCTT_FONE_RES_2" name="fastCTT_FONE_RES_2" value="<?php if($fastCTT_FONE_RES_2 != "") echo $fastCTT_FONE_RES_2; ?>" class="<?php if($erro_fone_res_2 != "") echo "field_error"; else echo "input"; ?>" onKeyPress="return(ConsisteNumerico('9',this,event))">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ramal&nbsp;&nbsp;<input type="text" class="input" size="4" maxlength="9" name="fastCTT_FONE_RES_RAM" value="<?php if($fastCTT_FONE_RES_RAM != "") echo $fastCTT_FONE_RES_RAM; ?>" >
+								</td>
+							</tr>
+							<tr>
+								<td><div align="right" id="fone01"><b><label style="margin-right:5px;"><font color="#B5B5B5">Telefone Alternativo</font></label></b></div></td>
+								<td align="left">
+<input type="text" style="WIDTH:30px;"  maxlength="2" id="fastCTT_FONE1_1" name="fastCTT_FONE1_1" value="<?php if($fastCTT_FONE1_1 != "") echo $fastCTT_FONE1_1; ?>" class="<?php if($erro_fone1_1 != "") echo "field_error"; else echo "input"; ?>" onKeyPress="return(ConsisteNumerico('2',this,event))" onkeyup="if(this.value.length == 2) document.formFastCad.fastCTT_FONE1_2.focus()"> - 
+<input type="text" style="WIDTH:100px;" maxlength="9" id="fastCTT_FONE1_2" name="fastCTT_FONE1_2" value="<?php if($fastCTT_FONE1_2 != "") echo $fastCTT_FONE1_2; ?>" class="<?php if($erro_fone1_2 != "") echo "field_error"; else echo "input"; ?>" onKeyPress="return(ConsisteNumerico('9',this,event))">
+								</td>
+							</tr>
+							<tr>
+								<td width="150" class="td_cad"><div align="right"><b><label for="" style="margin-right:5px;">E-mail</label></b></div></td>
+								<td align="left"><input type="text" class="<?php if($erro_email != ""){echo "field_error";}else{echo "input";} ?>" maxlength="60" style="width:300px;" id="cad_email" name="fastUSR_EMAIL" value="<?php if($fastUSR_EMAIL != "") echo $fastUSR_EMAIL; ?>"></td>
+							</tr>
+						</table>
+					</td>
+					
+					<td width="20px"></td>
+					
+					<td width="48%" valign="top">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:black;">
+							<!-- COMPRA SEM LOGIN OU SENHA -->	
+							<tr>
+								<td colspan="2" bgcolor="#CBCBCB" height="30px" style="padding:10px 10px 10px 10px;"><label style="font-size:18px;"><strong>2 - Dados de Entrega</strong></label></td>
+							</tr>
+							<tr><td height="10px"></td></tr>
+							<tr>
+								<td colspan="2" width="<?php if ($showFields) echo "100%"; else echo "82%"; ?>" class="td_cad">
+									<iframe name="iframeCEPFastCad" id="iframeCEPFastCad" src="./ajax_cep_fast.php" frameborder="0" scrolling="no" align="center" width="100%" height="230px">
+										<p>Sem suporte a iFrames.</p>
+									</iframe>
+								</td>
+							</tr>
+							<tr>
+								<td align="center">
+									<a href="javascript:void(0);" class="button_large" title="Continuar comprando" onClick="Comprando();">» Continuar</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<!-- FIM - COMPRA SEM LOGIN OU SENHA -->
+
+	<!-- INICIALIZA JAVASCRIPT -->	
+	<?php if($fastPES_TIPO == "J"){ ?>
+		<script language="javascript" type="text/javascript">ControlCPFCNPJ('');</script>
+	<?php }else{ ?>
+		<script language="javascript" type="text/javascript">ControlCPFCNPJ('S');</script>
+	<?php } ?>
+	
+	<tr>
+		<td height="30px"></td>
+	</tr>
+	<tr>
+		<td colspan="3" bgcolor="#8B8682" align="center" style="padding:8px 0px 8px 0px; font-size:18px;"></td>
+	</tr>
+	<tr>
+		<td height="30px"></td>
+	</tr>
+</table>

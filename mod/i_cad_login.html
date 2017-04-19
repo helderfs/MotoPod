@@ -1,0 +1,107 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="" style="margin-bottom:15px;">
+	<!-- LOGIN ou CADASTRO -->
+	<tr>
+		<td colspan="2">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="color:black;">
+				<tr>
+					<!-- ################# JA CADASTRADO ################# -->
+					<td width="48%" valign="top">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="" style="border:0px dashed #cccccc">
+							<tr>
+								<td>
+									<table id="cad_login" width="100%" height="40%" border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td bgcolor="#FFCC33" height="30px" style="padding:10px 10px 10px 10px;"><label style="font-size:18px;"><strong>Já sou cadastrado</strong></label></td>
+										</tr>
+										<tr>
+											<td align="left" valign="bottom" height="30px" width="299"><label class="texto_campo">E-mail</td>
+										</tr>
+										<tr>
+											<td align="left" valign="top" >
+												<input  type="text" class="<?php if($errologinemail != "" || $errosenha != "") echo "field_error"; else echo "input"; ?>"
+														id="loginemailcad" name="loginemailcad" maxlength="100" style="WIDTH:99%;" 
+														value="<?php if($loginemailcad != ""){ echo $loginemailcad; } ?>" tabindex="4">
+											</td>
+										</tr>
+										<tr>
+											<td align="left" valign="bottom" height="30px"><label class="texto_campo">Senha</label></td>
+										</tr>
+										<tr>
+											<td align="left" valign="top">
+												<input type="password" class="<?php if($errologinemail != "" || $errosenha != ""){echo "field_error";}else{echo "input";} ?>" id="loginsenhacad" name="loginsenhacad" style="WIDTH:145px; margin-right:20px;" maxlength="30" tabindex="5">
+												<a href="javascript:janelaSecundaria('mod/lembrasenha.php', 480, 300);" class="menu02" title="Lembrar Senha"><b>Esqueci minha senha</b></a>
+											</td>
+										</tr>
+										<tr>
+											<td align="left" height="70px;"><input class="btsubmit" type="submit" name="btEfetuaLogin" value="Efetuar Login" tabindex="6"></td>
+										</tr>
+										<!--
+										<tr>
+											<td align="left" valign="top">
+												<div style="border-top:1px solid #CCCCCC; margin-top:5px; padding-top:5px;">
+													<font size="5px">Esqueceu sua senha? <a href="javascript:janelaSecundaria('telaLembraSenha.php', 480, 300);" class="menu02" title="Lembrar Senha"><b>Clique aqui</b></a></font>
+												</div>
+											</td>
+										</tr>
+										-->
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<!-- ################# JA CADASTRADO ################# -->
+					<td width="20px"></td>
+					<!-- ################# NAO CADASTRADO ################# -->
+					<td width="48%" valign="top">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="" style="border:0px dashed #cccccc">
+							<tr>
+								<td>
+									<table id="cad_login" width="100%" border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td bgcolor="#FF4500" height="30px" style="padding:10px 10px 10px 10px;"><label style="font-size:18px;"><strong>Não sou cadastrado</strong></label></td> 
+										</tr>
+										<tr>
+											<td align="left" valign="bottom" height="30px" width="299"><label class="texto_campo">E-mail</label></td>
+										</tr>
+										<tr>
+											<td align="left" valign="top" ><input type="text" id="acessoemailcad" name="acessoemailcad" class="<?php if($acessoemailcad != "" || $errocep != ""){echo "field_error";}else{echo "input";} ?>" maxlength="100" style="WIDTH:99%;" value="<?php if($acessoemailcad != "") echo $acessoemailcad; ?>" tabindex="7"></td>
+										</tr>
+										<tr>
+											<td align="left" valign="bottom" height="30px"><label class="texto_campo">Informe seu CEP</label></td>
+										</tr>
+										<tr>
+											<td align="left" width="99px">
+												<input 	type="text" id="acessocep1" name="acessocep1" class="<?php if($acessoemailcad != "" || $errocep != "") echo "field_error"; else echo "input"; ?>" maxlength="5" size="4" style="FONT:bold; margin-right:0px;" 
+														value="<?php echo $acessocep1; ?>" tabindex="8" onkeyup="if(this.value.length == 5)document.formVerifCad.acessocep2.focus()" onkeypress="return SomenteNumero(event)"> -
+												<input 	type="text" id="acessocep2" name="acessocep2" class="<?php if($acessoemailcad != "" || $errocep != "") echo "field_error"; else echo "input"; ?>" maxlength="3" size="2" style="FONT:bold; margin-right:20px;" 
+														value="<?php echo $acessocep2; ?>" tabindex="9" onkeypress="return SomenteNumero(event)">
+												<a href="javascript:janelaSecundaria('cep.php?tipCEP=1', 780, 500);" class="menu02" title="Busca CEP"><b>Não sei meu CEP</b></a>
+											</td>
+										</tr>
+										<tr>
+											<td align="left" height="70px;">
+												<!--<input type="button" name="btIniciaCad" value="Iniciar Cadastro" onClick="window.location.replace('index.php?ac=dadospes&cep=' + getValues('acessocep'));">-->
+												<input class="btsubmit" type="submit" name="btIniciaCad" value="Iniciar Cadastro" tabindex="10">
+											</td>
+										</tr>
+										<!--
+										<tr>
+											<td align="left">
+												<div style="border-top:1px solid #CCCCCC; margin-top:5px; padding-top:5px;">
+													<font size="5px">Não sabe seu CEP? <a href="javascript:janelaSecundaria('cep.php?tipCEP=1', 780, 500);" class="menu02" title="Busca CEP"><b>Consultar CEP</b></a></font>
+												</div>
+											</td>
+										</tr>
+										-->
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<!-- ################# NAO CADASTRADO ################# -->
+				</tr>
+			</table>
+			<input name="r1" type="hidden" value="1">
+		</td>
+	</tr>
+</table>
