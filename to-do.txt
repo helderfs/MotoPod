@@ -1,0 +1,17 @@
+DESENVOLVIMENTOS PRIORITÁRIOS:
+
+1)
+Botoes p/ escolha de tamanho, assim como na SapatoOnline.com.br
+jquery-ui-1.8.14.custom\development-bundle\demos\button\radio.html
+
+DESENVOLVIMENTOS FUTUROS:
+
+Verificar como herdar os css do pai para filhos, como Cad. Estilo etc.
+
+
+############################## FERRAMENTAS
+file:///C:/Arquivos%20de%20programas/xampplite/htdocs/_Componentes/JQuery/_jquery-ui-1.8.14.custom/development-bundle/demos/button/radio.html
+file:///C:/Arquivos%20de%20programas/xampplite/htdocs/_Componentes/JQuery/_jquery-ui-1.8.14.custom/development-bundle/demos/button/checkbox.html
+file:///C:/Arquivos%20de%20programas/xampplite/htdocs/_Componentes/JQuery/_jquery-ui-1.8.14.custom/development-bundle/demos/datepicker/icon-trigger.html
+file:///C:/Arquivos%20de%20programas/xampplite/htdocs/_Componentes/JQuery/_jquery-ui-1.8.14.custom/development-bundle/demos/draggable/sortable.html
+file:///C:/Arquivos%20de%20programas/xampplite/htdocs/_Componentes/JQuery/_jquery-ui-1.8.14.custom/development-bundle/demos/sortable/default.html

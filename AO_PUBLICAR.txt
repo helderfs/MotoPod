@@ -1,0 +1,5 @@
+AO PUBLICAR....
+
+NO SERVIDOR DA HOSPEDAGEM FAZER:
+
+main.php		Descomentar linha ???<script language="javascript" type="text/javascript">window.location="http://www.motopod.com.br";</script>
